@@ -72,4 +72,4 @@ for (inp, out) in zip(query['inputs'], result['outputs']):
     print("{inp:>30} -> {out:>30}".format(inp=inp, out=out))
 
 print(
-    "\nThe transforms that are used in this demo include: Lowercase, Strip white-space, Convert unicode to ASCII, Strip token (to remove 'Ltd'), Fix badly encoded unicode")
+    "\nThe transforms that are used in this demo include: Lowercase, Strip white-space, Convert unicode to ASCII, Strip token (to remove 'PLC'), Fix badly encoded unicode")
