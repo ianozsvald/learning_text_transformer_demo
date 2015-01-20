@@ -1,5 +1,5 @@
 # coding=UTF8
-"""Annotate.io demo  to show how we learn a transformation sequence for data cleaning"""
+"""Annotate.io demo to show how we learn a transformation sequence for data cleaning"""
 from __future__ import print_function, unicode_literals
 import requests
 import json
