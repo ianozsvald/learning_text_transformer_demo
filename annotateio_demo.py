@@ -54,7 +54,7 @@ query = {'inputs': ['RBS PLC',  # token 'Ltd' that needs stripping
                     ],
          'transforms': transforms}
 print()
-print("Data cleaning phase - we use the `transforms` that we've learned on previously unseen `inputs` items to generate new `outputs`):")
+print("Data cleaning phase - we use the `transforms` that we've learned on previously unseen `inputs` items to generate new `outputs`:")
 print("inputs:", query['inputs'])
 
 resp = requests.post(root_url + "/transform",
