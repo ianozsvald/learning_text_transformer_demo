@@ -22,6 +22,7 @@ This demo is self-contained, it needs a connection to the internet, it posts the
 More information
 ----------------
 
-A write-up of some of the goals is available here:
+A write-up of some of the goals including slides are available here:
+ * http://ianozsvald.com/2015/02/08/lightning-talk-at-pydatalondon-for-annotate/
  * http://ianozsvald.com/2015/01/10/a-first-approach-to-automatic-text-data-cleaning/
  * http://ianozsvald.com/2015/01/27/annotate-io-self-learning-text-cleaner-demo-online/
