@@ -27,6 +27,8 @@ training_inputs = [
     "30000 OTE plus bonus",
     "£55000 salary",
     "£90,000 salary",
+    "70,000",
+    "80, 000",
     "Forty two thousand GBP"
 ]
 
@@ -36,6 +38,8 @@ training_outputs = [
     "30000",
     "55000",
     "90000",
+    "70000",
+    "80000",
     "42000"
 ]
 
