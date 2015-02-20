@@ -21,17 +21,29 @@ print(__doc__)
 resp = requests.get(root_url)
 assert resp.status_code == 200, "If we don't get a 200 OK then maybe the server is down?"
 
+training_inputs = [
+    "To 53K w/benefits",
+    "25k",
+    "30000 OTE plus bonus",
+    "£55000 salary",
+    "£90,000 salary",
+    "Forty two thousand GBP"
+]
+
+training_outputs = [
+    "53000",
+    "25000",
+    "30000",
+    "55000",
+    "90000",
+    "42000"
+]
+
 # Use a POST to call /learn with examples of
 # the desired inputs and outputs
 root_url = root_url
-query = {'inputs': ["To 53K w/benefits",
-                    "30000 OTE plus bonus",
-                    "£55000 salary",
-                    "Forty two thousand GBP"],
-         'outputs': ["53000",
-                     "30000",
-                     "55000",
-                     "42000"]}
+query = {'inputs': training_inputs,
+         'outputs': training_outputs}
 print()
 print("Training phase - we use `inputs` to learn a transformation to get to the desired `outputs`:")
 print("inputs:", query['inputs'])
