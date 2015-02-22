@@ -43,6 +43,15 @@ training_outputs = [
     "42000"
 ]
 
+
+def call_annotate(root_url, operation, query):
+    assert operation in set(['learn', 'transform'])
+    resp = requests.post(root_url + "/" + operation,
+                         data=json.dumps(query),
+                         headers={'Content-Type': 'application/json'})
+    assert resp.status_code == 200
+    return resp.json()
+
 # Use a POST to call /learn with examples of
 # the desired inputs and outputs
 root_url = root_url
@@ -51,39 +60,44 @@ query = {'inputs': training_inputs,
 print()
 print("Training phase - we use `inputs` to learn a transformation to get to the desired `outputs`:")
 print("inputs:", query['inputs'])
-print("outputs:", query['outputs'])
+print("Desired outputs:", query['outputs'])
 print("Calling Annotate.io...")
-resp = requests.post(root_url + "/learn",
-                     data=json.dumps(query),
-                     headers={'Content-Type': 'application/json'})
-assert resp.status_code == 200
+result = call_annotate(root_url, 'learn', query)
+transforms = result['transforms']
+
 
 # store the code that we're sent
-transforms = resp.json()['transforms']
-print("Training phase complete, now we have a `transforms` code")
+print("Training phase complete, now we have a `transforms` code:")
+print(transforms)
+
+query = {'inputs': training_inputs,
+         'transforms': transforms}
+result = call_annotate(root_url, 'transform', query)
+outputs = result['outputs']
+print("Transform applied to inputs:", outputs)
 
 # Use a POST to call /transform with the code
 # and new inputs, we'll receive outputs back
 query = {'inputs': [
                     "90k",
                     "120,000 + bonus",
-                    "Seventy thousand"
+                    "Seventy thousand",
+                    "95, 000"
                     ],
          'transforms': transforms}
 print()
 print("Data cleaning phase - we use the `transforms` that we've learned on previously unseen `inputs` items to generate new `outputs`:")
 print("inputs:", query['inputs'])
 
-resp = requests.post(root_url + "/transform",
-                     data=json.dumps(query),
-                     headers={'Content-Type': 'application/json'})
-assert resp.status_code == 200
-result = resp.json()
+result = call_annotate(root_url, 'transform', query)
+outputs = result['outputs']
 print("We now have a transformed result:")
-print("outputs:", result['outputs'])
+print("outputs:", outputs)
 
 print("\nPretty printed:")
 print("{inp:>30}    {out:>30}".format(
     inp="Previously unseen input:", out="Annotate's output:"))
 for (inp, out) in zip(query['inputs'], result['outputs']):
     print("{inp:>30} -> {out:>30}".format(inp=inp, out=out))
+
+print("NOTE last two examples don't work yet, this needs some fixing...")
